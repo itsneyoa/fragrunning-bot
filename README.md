@@ -1,8 +1,10 @@
 # Fragruns bot
 A bot written by neyoa cause i couldn't find any open source ones
-> Please note Hypixel has a history of banning these bots without a reason - As there is no official statement yet this is entirely use at your own risk!
+> Warning -  Hypixel has a history of banning these bots without a reason. As there is no official statement yet this is entirely use at your own risk!
 
 <hr>
+
+> Please note this is still heavily in development and probably doesn't work at the moment
 
 ## Table of Content
 
