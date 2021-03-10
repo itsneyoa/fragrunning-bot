@@ -1,0 +1,11 @@
+{
+    "server": {
+        "host": "mc.hypixel.net",
+        "port": 25565
+      },
+      "minecraft": {
+        "accountType": "mojang",
+        "username": "yourUsername",
+        "password": "yourPassword"
+      }
+}
