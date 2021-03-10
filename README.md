@@ -53,4 +53,6 @@ The minecraft section includes a `username` and `password` option, if using a Mo
 - [ ] Add a queue
     - Currently it just joins a party, waits for 10s then leaves. It would by much better for it to have a queue of players to join after it leaves one party.
 - [ ] Restrict usage
-    - Have an optional setting to only allow certain players to use or have a blacklist of players. This is currently done via the ingame privacy settings, which isn't great
+    - Have an optional setting to only allow certain players to use or have a blacklist of players. This is currently done via the ingame privacy settings, which isn't great.
+- [ ] Make bot autoreconnect is kicked
+    - Pretty self-explanitory
