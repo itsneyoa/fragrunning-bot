@@ -55,7 +55,9 @@ The minecraft section includes a `username` and `password` option, if using a Mo
 - [ ] Make bot autoreconnect is kicked
     - Pretty self-explanitory
 
-### Credits to Open Source Software
-| Software | License |
+### Credits
+| a | b |
 | -------- | ------- |
-| [hypixel-discord-chat-bridge](https://github.com/Senither/hypixel-discord-chat-bridge) | [MIT](https://github.com/Senither/hypixel-discord-chat-bridge/blob/master/LICENSE.md) |
+| SergeantSar | Single handedly debugged my trash code, added additional functionality |
+| [neyoa](https://github.com/itsneyoa) | Wrote the foundation code on the [hypixel-bridge](https://github.com/Senither/hypixel-discord-chat-bridge)|
+| [Senither](http://senither.com/) | Wrote [hypixel-bridge](https://github.com/Senither/hypixel-discord-chat-bridge), the inspiration for this and how I learned mineflayer|
