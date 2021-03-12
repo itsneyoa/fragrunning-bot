@@ -1,10 +1,8 @@
 # Fragruns bot
-A bot written by neyoa cause i couldn't find any open source ones
+A bot written by [SergeantSar](neyoa.me) and [neyoa](https://github.com/itsneyoa) because we couldn't find any open source ones and the public ones keep getting banned
 > Warning -  Hypixel has a history of banning these bots without a reason. As there is no official statement yet this is entirely use at your own risk!
 
 <hr>
-
-> Please note this is still heavily in development and probably doesn't work at the moment
 
 ## Table of Content
 
@@ -42,9 +40,7 @@ Next edit and setup the config file with a proper Minecraft and Discord settings
 
 #### Server
 
-The server is the server the Minecraft client should connect to, by default it will point to Hypixels server so it can be left as-is if the plan is to use the app for Hypixel guild chat, if not then the `host` is the servers IP or hostname, and the `port` is the port the server is running on.
-
-> Note: The port must be a number, Mineflayer expects an integer so you can't wrap the port in quotes or Mineflayer won't create a connection to the Minecraft server.
+The server is the server the Minecraft client should connect to, by default it will point to Hypixels server so it can be left as-is if the plan is to use the app for Hypixel, if not then the `host` is the servers IP or hostname
 
 #### Minecraft
 
@@ -58,3 +54,8 @@ The minecraft section includes a `username` and `password` option, if using a Mo
     - Have an optional setting to only allow certain players to use or have a blacklist of players. This is currently done via the ingame privacy settings, which isn't great.
 - [ ] Make bot autoreconnect is kicked
     - Pretty self-explanitory
+
+### Credits to Open Source Software
+| Software | License |
+| -------- | ------- |
+| [hypixel-discord-chat-bridge](https://github.com/Senither/hypixel-discord-chat-bridge) | [MIT](https://github.com/Senither/hypixel-discord-chat-bridge/blob/master/LICENSE.md) |
