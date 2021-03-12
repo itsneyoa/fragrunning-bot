@@ -1,11 +1,12 @@
 const mineflayer = require('mineflayer');
 const chalk = require('chalk');
+const config = require('./config.json')
 
 const bot = mineflayer.createBot({
-  host: "hypixel.net",
-  username: 'ur-username',
-  password: 'ur-password',
-  auth: "mojang",
+  host: config.server.host,
+  username: config.minecraft.username,
+  password: config.minecraft.password,
+  auth: config.minecraft.accountType,
 });
 
 var loginAttempts = 0;
@@ -58,8 +59,11 @@ bot.on('message', jsonMsg => {
     }
     console.log(chalk.yellow(`Partying ${ign}`))
     bot.chat(`/p accept ${ign}`)
-    setTimeout(() => bot.chat(`/pc Hi! I'm ${bot.username}. You can party me for frag runs - I'll auto leave after 10 seconds.`), 1000)
-    setTimeout(() => bot.chat(`/p leave`), 9000)
+  }
+
+  if (isPartyJoinMessage(message)) {
+    bot.chat(`/pc Hi! I'm ${bot.username}. You can party me for frag runs - I'll auto leave after 10 seconds.`);
+    setTimeout(() => bot.chat(`/p leave`), config.settings.timeout);
   }
 
   if (failedToJoinParty(message)) {
@@ -90,6 +94,10 @@ function isPartyMessage(message) {
 
 function failedToJoinParty(message) {
   return message.includes('That player does not exist.');
+}
+
+function isPartyJoinMessage(message) {
+  return message.startsWith(`You have joined `) && message.endsWith(`'s party!`);
 }
 
 function unkownCommand(message) {
