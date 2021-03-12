@@ -62,10 +62,14 @@ bot.on('message', jsonMsg => {
   }
 
   if (isPartyJoinMessage(message)) {
+    console.log(chalk.cyan(`Successfully joined a party!`));
     bot.chat(`/pc Hi! I'm ${bot.username}. You can party me for frag runs - I'll auto leave after 10 seconds.`);
     setTimeout(() => bot.chat(`/p leave`), config.settings.timeout);
   }
 
+  if (isPartyLeaveMessage(message)) {
+    console.log(chalk.magenta(`Left the party`));
+  }
   if (failedToJoinParty(message)) {
     console.log(chalk.red(`Failed to join party`))
   }
@@ -98,6 +102,10 @@ function failedToJoinParty(message) {
 
 function isPartyJoinMessage(message) {
   return message.startsWith(`You have joined `) && message.endsWith(`'s party!`);
+}
+
+function isPartyLeaveMessage(message) {
+  return message.startsWith(`You left the party.`) || message.startsWith(`The party was disbanded because all invites expired and the party was empty`);
 }
 
 function unkownCommand(message) {
