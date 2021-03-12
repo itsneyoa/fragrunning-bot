@@ -1,5 +1,5 @@
 # Fragruns bot
-A bot written by [SergeantSar](neyoa.me) and [neyoa](https://github.com/itsneyoa) because we couldn't find any open source ones and the public ones keep getting banned
+A bot written by [SergeantSar](https://github.com/SergeantSar) and [neyoa](https://github.com/itsneyoa) because we couldn't find any open source ones and the public ones keep getting banned
 > Warning -  Hypixel has a history of banning these bots without a reason. As there is no official statement yet this is entirely use at your own risk!
 
 <hr>
@@ -58,6 +58,6 @@ The minecraft section includes a `username` and `password` option, if using a Mo
 ### Credits
 | a | b |
 | -------- | ------- |
-| SergeantSar | Single handedly debugged my trash code, added additional functionality |
+| [SergeantSar](https://github.com/SergeantSar) | Single handedly debugged my trash code, added additional functionality |
 | [neyoa](https://github.com/itsneyoa) | Wrote the foundation code on the [hypixel-bridge](https://github.com/Senither/hypixel-discord-chat-bridge)|
 | [Senither](http://senither.com/) | Wrote [hypixel-bridge](https://github.com/Senither/hypixel-discord-chat-bridge), the inspiration for this and how I learned mineflayer|
