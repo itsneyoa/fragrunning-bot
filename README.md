@@ -14,7 +14,7 @@ A bot written by [SergeantSar](https://github.com/SergeantSar) and [neyoa](https
 ### Prerequisites
 
 - Git
-- NodeJS >= 14
+- NodeJS 14
 - Yarn >= 1.2
 - A Minecraft account
 
