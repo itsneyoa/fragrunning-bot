@@ -1,15 +1,23 @@
 {
-  "name": "fragruns",
-  "version": "0.0.1",
-  "description": "",
+  "name": "fragrunning-bot",
+  "version": "1.0.1",
+  "description": "A bot written by [SergeantSar](https://github.com/SergeantSar) and [neyoa](https://github.com/itsneyoa) because we couldn't find any open source ones and the public ones keep getting banned\r > Warning -  Hypixel has a history of banning these bots without a reason. As there is no official statement yet this is entirely use at your own risk!",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsneyoa/fragrunning-bot.git"
+  },
+  "author": "neyoa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itsneyoa/fragrunning-bot/issues"
+  },
+  "homepage": "https://github.com/itsneyoa/fragrunning-bot#readme",
   "dependencies": {
     "chalk": "^4.1.0",
-    "mineflayer": "^3.2.0"
+    "mineflayer": "^3.3.0"
   }
 }
