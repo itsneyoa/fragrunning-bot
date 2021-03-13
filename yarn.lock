@@ -243,7 +243,7 @@ macaddress@^0.5.1:
   resolved "https://registry.yarnpkg.com/macaddress/-/macaddress-0.5.1.tgz#5d717ad50337f96085655d5db06ebc60df11fc59"
   integrity sha512-et8b+V48uHaOB2fyNhPWwlm2PenfcfkGmHUwuVT3lxFEhfwaKwq5VmM4Cw4MYDwMrujvF0ktA2sSJidCjZBSzg==
 
-minecraft-data@^2.61.0, minecraft-data@^2.62.1, minecraft-data@^2.70.0, minecraft-data@^2.73.1, minecraft-data@^2.74.0, minecraft-data@^2.75.0:
+minecraft-data@^2.61.0, minecraft-data@^2.62.1, minecraft-data@^2.70.0, minecraft-data@^2.73.1, minecraft-data@^2.74.0, minecraft-data@^2.79.0:
   version "2.79.0"
   resolved "https://registry.yarnpkg.com/minecraft-data/-/minecraft-data-2.79.0.tgz#e8a7fb516c52d37ecd8a7ea750b88547d3dc776a"
   integrity sha512-pLDE0/csN0W8OktCzF008sW4jr20L6EMjg8uhUBlNDItx6tkfHD25KsdTcnF/G0xUGpMSV3S43040nESmSoaYQ==
@@ -254,9 +254,9 @@ minecraft-folder-path@^1.1.0:
   integrity sha512-qaUSbKWoOsH9brn0JQuBhxNAzTDMwrOXorwuRxdJKKKDYvZhtml+6GVCUrY5HRiEsieBEjCUnhVpDuQiKsiFaw==
 
 minecraft-protocol@^1.17.0:
-  version "1.23.2"
-  resolved "https://registry.yarnpkg.com/minecraft-protocol/-/minecraft-protocol-1.23.2.tgz#e0e5cb0f12f7814f11e6439c555b6635b0ef3537"
-  integrity sha512-eSPTy79dCqao4brOSKUHdRn8X4QunJ7q3wXvDWTkbCNPY2FzgBg7DrQfCdvVFh+YOGWSJDE+EslVQb1zLFbDhQ==
+  version "1.23.3"
+  resolved "https://registry.yarnpkg.com/minecraft-protocol/-/minecraft-protocol-1.23.3.tgz#2da416b48cda301469b0bd2af92c6ee8b1a1001e"
+  integrity sha512-jUdp/adqe1IoL1QDVYYnrRx3uzisfErzwhfiWAQns25QUq+kbVhwg0xPiWF2Mn4EB28YPoLTpgAlI8AuYpOfyw==
   dependencies:
     "@azure/msal-node" "^1.0.0-beta.3"
     "@xboxreplay/xboxlive-auth" "^3.3.3"
@@ -276,22 +276,22 @@ minecraft-protocol@^1.17.0:
     uuid-1345 "^1.0.1"
     yggdrasil "^1.4.0"
 
-mineflayer@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/mineflayer/-/mineflayer-3.2.0.tgz#4068c76bd8e2524e207b2902d51631eecafe2ce6"
-  integrity sha512-dEIFiQfXT9FADRuZoyBGn3i5ThYo8TNkd3C+lw4Z+AhwDgAU/Sq2v46gWcouoj2Um1F9J6sFX5NBFvfZ/5hYpw==
+mineflayer@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/mineflayer/-/mineflayer-3.3.0.tgz#e8ca9515148de7cacb50113ecbf7ef7eaded5aa8"
+  integrity sha512-qWE4dRqo0prkq3qARpzHzcMWDsBQEcCW2Q4WUExXjWtxfor6JU2kQT53aGV4aMMjqdcmEu5i7SJT9ufAmli25g==
   dependencies:
-    minecraft-data "^2.75.0"
+    minecraft-data "^2.79.0"
     minecraft-protocol "^1.17.0"
     prismarine-biome "^1.1.0"
     prismarine-block "^1.6.0"
     prismarine-chat "^1.0.0"
     prismarine-chunk "^1.20.3"
     prismarine-entity "^1.0.0"
-    prismarine-item "^1.5.0"
+    prismarine-item "^1.6.0"
     prismarine-physics "^1.0.4"
     prismarine-recipe "^1.1.0"
-    prismarine-windows "^2.0.0"
+    prismarine-windows "^2.2.0"
     prismarine-world "^3.5.0"
     protodef "^1.8.0"
     typed-emitter "^1.2.0"
@@ -380,7 +380,7 @@ prismarine-entity@^1.0.0:
   dependencies:
     vec3 "^0.1.4"
 
-prismarine-item@^1.5.0:
+prismarine-item@^1.5.0, prismarine-item@^1.6.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/prismarine-item/-/prismarine-item-1.8.0.tgz#cb3bf755e92bcd643105708ec44fe1b4eb908e78"
   integrity sha512-2BIWAueINWvzNR761fMu3bXKaBsH67fNinE+ZT3tnw3+jCRSPEuvCJYwSlItQmsAjN1vu6rlER/GmbDnDgDboA==
@@ -408,7 +408,7 @@ prismarine-recipe@^1.1.0:
   resolved "https://registry.yarnpkg.com/prismarine-recipe/-/prismarine-recipe-1.1.0.tgz#ba83fea0d6f5ad3be83398a20f85f7e800665732"
   integrity sha512-eFmriEWoe6S6OSVbOJnsXpaBuzeIzjaGymDUTCtrOu80734NWKI7outdLI6R2ztJ+f2PFIkFmpkazAdScStGNA==
 
-prismarine-windows@^2.0.0:
+prismarine-windows@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/prismarine-windows/-/prismarine-windows-2.2.0.tgz#279ee7a8bb77550d4e1cc9b35754b729b5a12bd0"
   integrity sha512-PsOS3rHz4KPbs4XMeGcr+tnCpI5Ea8XqYa1kJay1y7+LpRb3sf5HxjxuPJqogWbmkZQuXogL3x5KcN93v4eEqw==
@@ -431,9 +431,9 @@ protodef-validator@^1.2.2:
     ajv "^6.5.4"
 
 protodef@^1.8.0, protodef@^1.9.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/protodef/-/protodef-1.9.0.tgz#f387a1a71648ab7a7b7c579bf58e249e5f45beb1"
-  integrity sha512-RZZtHOT8Q8AaKEbKsPlndivoPOOjm+ddHFVwooBMNTw8XMN4cRo4tKTNCyXf12+IIkzkPDgbAwKjLHCJXYI3HQ==
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/protodef/-/protodef-1.10.0.tgz#b80b892791ee2c6e81fa010d2542e527c7b7134c"
+  integrity sha512-6ZKIrtZrk11JDFe5JNxqsaH+kK3xE/lKzZwSaJRkK1Eawam2QDw5glEPqX+WwFMwGODqlNCwZNAcJ4wI8mpnng==
   dependencies:
     lodash.get "^4.4.2"
     lodash.reduce "^4.6.0"
