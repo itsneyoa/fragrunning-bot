@@ -13,10 +13,10 @@ A bot written by [SergeantSar](https://github.com/SergeantSar) and [neyoa](https
 
 ### Prerequisites
 
-- Git
-- NodeJS 14
-- Yarn >= 1.2
-- A Minecraft account
+- [Git](https://git-scm.com/downloads)
+- [NodeJS](https://nodejs.org/en/) >= 14
+- [Yarn](https://yarnpkg.com/getting-started/install) >= 1.2
+- A [Minecraft account](https://minecraft.net/)
 
 ### Installation & Setup
 
