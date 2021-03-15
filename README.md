@@ -56,7 +56,7 @@ The minecraft section includes a `username` and `password` option, if using a Mo
     - Pretty self-explanitory
 
 ### Credits
-| a | b |
+| | |
 | -------- | ------- |
 | [SergeantSar](https://github.com/SergeantSar) | Single handedly debugged my trash code, added additional functionality |
 | [neyoa](https://github.com/itsneyoa) | Wrote the foundation code on the [hypixel-bridge](https://github.com/Senither/hypixel-discord-chat-bridge)|
