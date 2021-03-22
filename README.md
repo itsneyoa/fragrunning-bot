@@ -10,7 +10,6 @@ A bot written by [SergeantSar](https://github.com/SergeantSar) and [neyoa](https
   - [Table of Content](#table-of-content)
     - [Prerequisites](#prerequisites)
     - [Installation & Setup](#installation--setup)
-    - [Easy deployment](#easy-deployment)
     - [Roadmap](#roadmap)
 
 ### Prerequisites
@@ -23,12 +22,6 @@ A bot written by [SergeantSar](https://github.com/SergeantSar) and [neyoa](https
 ### Installation & Setup
 
 You can find an [installation guide](https://github.com/itsneyoa/fragrunning-bot/wiki/Installation-Guide) on the [repository wiki pages](https://github.com/itsneyoa/fragrunning-bot/wiki/Home)
-
-
-### Easy deployment
-
-[![Deploy to DO](https://www.deploytodo.com/do-btn-blue-ghost.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/itsneyoa/fragrunning-bot/tree/master)
-
 
 ### Roadmap
 
