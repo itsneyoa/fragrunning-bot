@@ -1,0 +1,7 @@
+spec:
+ name: fragrunning-bot
+ services:
+ - name: fragrunning-bot
+   git:
+     branch: master
+     repo_clone_url: https://github.com/itsneyoa/fragrunning-bot.git
