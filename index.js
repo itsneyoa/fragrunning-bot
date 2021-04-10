@@ -43,7 +43,6 @@ bot.on('kicked', (reason) => {
 
 bot.on('message', jsonMsg => {
   const message = jsonMsg.toString();
-  console.log(message)
 
   if (isLobbyJoinMessage(message)) {
     return sendToLimbo()
@@ -123,5 +122,5 @@ function addCharToString(string, chars, times) {
 
 function sendToLimbo() {
   console.log(`Sending client to limbo`)
-  return bot.chat('limbowo')
+  return bot.chat('/ac §')
 }
