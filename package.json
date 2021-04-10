@@ -4,7 +4,7 @@
   "description": "A bot written by [SergeantSar](https://github.com/SergeantSar) and [neyoa](https://github.com/itsneyoa) because we couldn't find any open source ones and the public ones keep getting banned\r > Warning -  Hypixel has a history of banning these bots without a reason. As there is no official statement yet this is entirely use at your own risk!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ."
   },
   "repository": {
     "type": "git",
