@@ -7,9 +7,6 @@
     "username": "yourUsername",
     "password": "yourPassword"
   },
-  "settings": {
-    "timeout": 10000
-  },
   "blacklist": {
     "users": []
   }
