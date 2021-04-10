@@ -1,2 +1,5 @@
+# Automatically installed when you run `yarn`
 node_modules/
+
+# Private info
 config.json
