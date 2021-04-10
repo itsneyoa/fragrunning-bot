@@ -25,9 +25,13 @@ You can find an [installation guide](https://github.com/itsneyoa/fragrunning-bot
 
 ### Roadmap
 
-- [ ] Add a queue
-    - Currently it just joins a party, waits for 10s then leaves. It would by much better for it to have a queue of players to join after it leaves one party.
-- [ ] Restrict usage
-    - Have an optional setting to only allow certain players to use or have a blacklist of players. This is currently done via the ingame privacy settings, which isn't great.
-- [ ] Make bot autoreconnect is kicked
-    - Pretty self-explanitory
+- [ ] Add more whitelist options
+    - Anyone (none)
+    - Guild members of given guild(s) (guild)
+    - People on friends list of a given player (friend)
+    - Only people listed in config (strict)
+- [ ] Make bot autoreconnect on kick
+    - Currently it crashes
+    - This would take like 2 minutes to fix
+    - I'm lazy
+    - Bottom text
