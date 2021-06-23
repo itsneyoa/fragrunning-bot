@@ -11,6 +11,7 @@ class StateHandler {
     this.bot.on('login', (...args) => this.onLogin(...args))
     this.bot.on('end', (...args) => this.onEnd(...args))
     this.bot.on('kicked', (...args) => this.onKicked(...args))
+    this.bot.on('spawn', (...args) => this.onSpawn(...args))
   }
 
   onLogin() {
@@ -33,8 +34,7 @@ class StateHandler {
     }
 
     this.minecraft.app.log.warn(
-      `Minecraft bot disconnected from server, attempting reconnect in ${
-        loginDelay / 1000
+      `Minecraft bot disconnected from server, attempting reconnect in ${loginDelay / 1000
       } seconds`
     )
 
@@ -47,6 +47,10 @@ class StateHandler {
     )
 
     this.loginAttempts++
+  }
+
+  onSpawn() {
+    this.minecraft.bot.chat('/ac §')
   }
 }
 
