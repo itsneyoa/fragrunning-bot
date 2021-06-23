@@ -1,5 +1,6 @@
 const StateHandler = require('./Handlers/StateHandler')
 const ChatHandler = require('./Handlers/ChatHandler')
+const PartyHandler = require('./Handlers/PartyHandler')
 const mineflayer = require('mineflayer')
 
 class MinecraftManager {
@@ -8,6 +9,7 @@ class MinecraftManager {
 
     this.stateHandler = new StateHandler(this)
     this.chatHandler = new ChatHandler(this)
+    this.partyHandler = new PartyHandler(this)
   }
 
   connect() {

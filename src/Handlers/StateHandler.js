@@ -16,7 +16,7 @@ class StateHandler {
   }
 
   onLogin() {
-    this.minecraft.app.log.minecraft('Client ready, logged in as ' + this.bot.username)
+    this.minecraft.app.log.clien('Ready, logged in as ' + this.bot.username)
 
     this.loginAttempts = 0
     this.exactDelay = 0
@@ -44,6 +44,7 @@ class StateHandler {
   }
 
   onSpawn() {
+    this.minecraft.app.log.client('Sending Minecraft client to limbo')
     this.minecraft.bot.chat('/ac §')
   }
 
@@ -53,9 +54,7 @@ class StateHandler {
     }
 
     if (this.isConnectionRefusedError(error)) {
-      return this.minecraft.app.log.warn(
-        'Connection refused while attempting to login via the Minecraft client'
-      )
+      return this.minecraft.app.log.warn('Connection refused while attempting to login via the Minecraft client')
     }
 
     return this.minecraft.app.log.warn(error)

@@ -1,12 +1,12 @@
 const chalk = require('chalk')
 
 class Logger {
-  minecraft(message) {
-    return console.log(chalk.bgGreenBright.black(`[${this.getCurrentTime()}] Minecraft >`) + ' ' + chalk.greenBright(message))
+  client(message) {
+    return console.log(chalk.bgGreenBright.black(`[${this.getCurrentTime()}] Client >`) + ' ' + chalk.greenBright(message))
   }
 
   party(message) {
-    return console.log(chalk.bgMagenta(`[${this.getCurrentTime()}] Minecraft >`) + ' ' + chalk.magenta(message))
+    return console.log(chalk.bgMagenta(`[${this.getCurrentTime()}] Party >`) + ' ' + chalk.magenta(message))
   }
 
   warn(message) {
