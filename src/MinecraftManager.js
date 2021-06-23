@@ -1,5 +1,4 @@
 const StateHandler = require('./Handlers/StateHandler')
-const ErrorHandler = require('./Handlers/ErrorHandler')
 const ChatHandler = require('./Handlers/ChatHandler')
 const mineflayer = require('mineflayer')
 
@@ -8,14 +7,12 @@ class MinecraftManager {
     this.app = app
 
     this.stateHandler = new StateHandler(this)
-    this.errorHandler = new ErrorHandler(this)
     this.chatHandler = new ChatHandler(this)
   }
 
   connect() {
     this.bot = this.createBotConnection()
 
-    this.errorHandler.registerEvents(this.bot)
     this.stateHandler.registerEvents(this.bot)
     this.chatHandler.registerEvents(this.bot)
   }
