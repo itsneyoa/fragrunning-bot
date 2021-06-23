@@ -15,12 +15,12 @@ class StateHandler {
     }
 
     if (this.isConnectionRefusedError(error)) {
-      return console.log(
+      return this.minecraft.app.log.warn(
         'Connection refused while attempting to login via the Minecraft client'
       )
     }
 
-    console.log(error)
+    return this.minecraft.app.log.warn(error)
   }
 
   isConnectionResetError(error) {
