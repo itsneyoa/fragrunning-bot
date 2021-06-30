@@ -9,6 +9,10 @@ class Logger {
     return console.log(chalk.bgMagenta(`[${this.getCurrentTime()}] Party >`) + ' ' + chalk.magenta(message))
   }
 
+  info(message) {
+    return console.log(chalk.bgBlueBright(`[${this.getCurrentTime()}] Info >`) + ' ' + chalk.blueBright(message))
+  }
+
   warn(message) {
     return console.log(chalk.bgYellow.black(`[${this.getCurrentTime()}] Warning >`) + ' ' + chalk.yellow(message))
   }
