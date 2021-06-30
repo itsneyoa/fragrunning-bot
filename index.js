@@ -1,12 +1,12 @@
 'use strict'
-process.title = 'Hypixel Skyblock Fragrunning Bot'
+process.title = 'Hypixel Fragrunning Bot'
 
 const app = require('./src/App')
 
 app
   .register()
   .then(() => {
-    app.connect()
+    app.start()
   })
   .catch((e) => {
     console.error(e)

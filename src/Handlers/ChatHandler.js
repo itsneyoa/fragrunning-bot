@@ -1,6 +1,6 @@
 class StateHandler {
-  constructor(minecraft) {
-    this.minecraft = minecraft
+  constructor(app) {
+    this.app = app
   }
 
   registerEvents(bot) {
@@ -13,15 +13,13 @@ class StateHandler {
     const message = event.toString().trim()
 
     if (this.isLobbyJoinMessage(message)) {
-      this.minecraft.app.log.client('Sending Minecraft client to limbo')
+      this.app.log.client('Sending Minecraft client to limbo')
       return this.bot.chat('/ac §')
     }
 
     if (this.isPartyMessage(message)) {
-      return this.minecraft.partyHandler.onMessage(message)
+      return this.app.partyHandler.onMessage(message)
     }
-
-    console.log(message)
   }
 
   isLobbyJoinMessage(message) {
@@ -29,7 +27,7 @@ class StateHandler {
   }
 
   isPartyMessage(message) {
-    return true
+    return message.includes('party')
   }
 }
 

@@ -7,7 +7,11 @@
     "username": "yourUsername",
     "password": "yourPassword"
   },
-  "blacklist": {
-    "users": []
+  "fragruns": {
+    "mode": "guild",
+    "guildName": "",
+    "friendsName": "",
+    "whitelistUsers": [""],
+    "blacklist": [""]
   }
 }
