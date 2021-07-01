@@ -7,7 +7,7 @@ class StateHandler {
     this.queue = []
     this.active = false
     this.whitelist = []
-    this.mode = 'disabled'
+    this.whitelistEnabled = false
   }
 
   async registerEvents(bot) {
@@ -29,8 +29,6 @@ class StateHandler {
       return this.bot.chat('/ac §')
     }
 
-    if (this.mode == 'disabled') return
-
     if (this.isInvite(message)) {
       let inviter = message.split(" ")[1]
       if (inviter === "has") inviter = message.split(" ")[0].replace("-----------------------------\n", "")
@@ -39,7 +37,7 @@ class StateHandler {
         return this.app.log.party(`Not accepting invite from ${inviter} as they're blacklisted`)
       }
 
-      if (this.whitelist.includes(inviter) || this.mode == 'everyone' || (this.mode == 'whitelist' && !this.whitelist.length)) {
+      if (this.whitelist.includes(inviter) || !this.whitelistEnabled) {
         this.app.log.party(`Accepting party invite from ${inviter}`)
       } else {
         this.app.log.party(`Not accepting party invite from ${inviter} as they aren't on the whitelist`)
@@ -51,39 +49,39 @@ class StateHandler {
     switch (this.app.config.fragruns.mode.toLowerCase()) {
       case 'guild':
         this.app.log.info(`Getting players from guild: ${this.app.config.fragruns.guildName}`)
-        this.mode = 'whitelist'
         this.getGuildMembers(this.app.config.fragruns.guildName).then(members => {
           this.app.log.info(`Fetched ${members.length} players from guild: ${this.app.config.fragruns.guildName}`)
           this.whitelist = members
+          this.whitelistEnabled = true
         }).catch((e) => {
           this.app.log.warn(`${e} - Fragbot mode defaulting to public`)
-          this.whitelist = []
+          this.whitelistEnabled = false
         })
         break
       case 'friend':
       case 'friends':
         this.app.log.info(`Getting players from ${this.app.config.fragruns.friendsName}'s friends list`)
-        this.mode = 'whitelist'
         this.getFriendsList(this.app.config.fragruns.friendsName).then(members => {
           this.app.log.info(`Fetched ${members.length} players from ${username}'s friends list!`)
           this.whitelist = members
+          this.whitelistEnabled = true
         }).catch((e) => {
           this.app.log.warn(`${e} - Fragbot mode defaulting to public`)
-          this.whitelist = []
+          this.whitelistEnabled = false
         })
         break
       case 'user':
       case 'username':
         this.app.log.info(`Accepting party invites from: ${this.app.config.fragruns.whitelistUsers.join(', ')}`)
-        this.mode = 'whitelist'
+        this.whitelistEnabled = true
         return this.config.fragruns.whitelistUsers
-      case 'everyone':
-        this.app.log.info(`Accepting party invites from everyone`)
-        this.mode = 'everyone'
-        return []
+      case 'solo':
+        this.app.log.info(`Only accepting party invites from ${this.app.config.fragruns.soloUser} and never leaving`)
+        this.whitelistEnabled = true
+        return [this.app.config.fragruns.soloUser]
       default:
-        this.mode = 'disabled'
-        return []
+        this.app.log.info(`Accepting party invites from everyone`)
+        this.whitelistEnabled = false
     }
   }
 

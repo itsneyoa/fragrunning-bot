@@ -34,7 +34,7 @@ class StateHandler {
 
     this.app.log.warn(`Minecraft bot disconnected from server, attempting reconnect in ${loginDelay / 1000} seconds`)
 
-    setTimeout(() => this.connect(), loginDelay)
+    setTimeout(() => this.app.start(), loginDelay)
   }
 
   onKicked(reason) {

@@ -12,6 +12,7 @@
     "guildName": "",
     "friendsName": "",
     "whitelistUsers": [""],
+    "soloUser": "",
     "blacklist": [""]
   }
 }
