@@ -6,7 +6,7 @@ class Logger {
   }
 
   party(message) {
-    return console.log(chalk.bgMagenta(`[${this.getCurrentTime()}] Party >`) + ' ' + chalk.magenta(message))
+    return console.log(chalk.bgMagenta.black(`[${this.getCurrentTime()}] Party >`) + ' ' + chalk.magenta(message))
   }
 
   info(message) {

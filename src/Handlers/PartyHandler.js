@@ -16,15 +16,17 @@ class PartyHandler {
   onMessage(message) {
     console.log(message)
 
+    if(this.isInvite(message)) {
+      
+    }
+
+    this.inviter = message.split(" ")[1]
+    if (this.inviter === "has") this.inviter = message.split(" ")[0].replace("-----------------------------\n", "")
+
     let user = message.split(' ')[4]
 
     if (!this.whitelist.includes(user) && !this.whitelist == null) {
       return this.app.log.party(`Not accepting invite from ${user} as they aren't on the whitelist`)
-    }
-
-    this.queue.push(user)
-    if (!this.active) {
-      this.looper()
     }
   }
 

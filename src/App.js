@@ -1,6 +1,5 @@
 const StateHandler = require('./Handlers/StateHandler')
 const ChatHandler = require('./Handlers/ChatHandler')
-const PartyHandler = require('./Handlers/PartyHandler')
 const mineflayer = require('mineflayer')
 const Logger = require('./Logger')
 const config = require('../config.json')
@@ -12,7 +11,6 @@ class App {
 
     this.stateHandler = new StateHandler(this)
     this.chatHandler = new ChatHandler(this)
-    this.partyHandler = new PartyHandler(this)
   }
 
   async start() {
@@ -20,11 +18,6 @@ class App {
 
     this.stateHandler.registerEvents(this.bot)
     this.chatHandler.registerEvents(this.bot)
-
-    this.partyHandler.fetchWhitelist()
-    setTimeout(() => {
-      this.partyHandler.fetchWhitelist()
-    }, 900000) // refresh every 15 minutes
   }
 
   createBotConnection() {
