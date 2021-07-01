@@ -33,12 +33,18 @@ class StateHandler {
       let inviter = message.split(" ")[1]
       if (inviter === "has") inviter = message.split(" ")[0].replace("-----------------------------\n", "")
 
+      if (this.app.config.fragruns.mode.toLowerCase() == 'solo' && inviter == this.app.config.fragruns.soloUser) {
+        this.app.log.party(`Joining ${inviter}'s party in solo mode`)
+        return this.bot.chat(`/p accept ${inviter}`)  // Solo runs: Join once, never leave. No queue needed.
+      }
+
       if (this.app.config.fragruns.blacklist.includes(inviter)) {
         return this.app.log.party(`Not accepting invite from ${inviter} as they're blacklisted`)
       }
 
       if (this.whitelist.includes(inviter) || !this.whitelistEnabled) {
         this.app.log.party(`Accepting party invite from ${inviter}`)
+        this.queue.push(inviter) // Add user to queue
       } else {
         this.app.log.party(`Not accepting party invite from ${inviter} as they aren't on the whitelist`)
       }
