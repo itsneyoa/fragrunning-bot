@@ -10,7 +10,7 @@ class Logger {
   }
 
   info(message) {
-    return console.log(chalk.bgBlueBright(`[${this.getCurrentTime()}] Info >`) + ' ' + chalk.blueBright(message))
+    return console.log(chalk.bgBlueBright.black(`[${this.getCurrentTime()}] Info >`) + ' ' + chalk.blueBright(message))
   }
 
   warn(message) {
