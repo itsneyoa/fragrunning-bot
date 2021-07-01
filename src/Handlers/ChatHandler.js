@@ -10,13 +10,13 @@ class StateHandler {
     this.whitelistEnabled = false
   }
 
-  async registerEvents(bot) {
+  registerEvents(bot) {
     this.bot = bot
 
     this.bot.on('message', (...args) => this.onMessage(...args))
 
     this.fetchWhitelist()
-    setTimeout(async () => {
+    setTimeout(() => {
       this.fetchWhitelist()
     }, 900000)
   }
