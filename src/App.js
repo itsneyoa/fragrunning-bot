@@ -1,12 +1,12 @@
 const StateHandler = require('./Handlers/StateHandler')
 const ChatHandler = require('./Handlers/ChatHandler')
+const Configuration = require('./Configuration')
 const mineflayer = require('mineflayer')
 const Logger = require('./Logger')
-const config = require('../config.json')
 
 class App {
   async register() {
-    this.config = config // add docker support via custom configuration file
+    this.config = new Configuration()
     this.log = new Logger()
 
     this.stateHandler = new StateHandler(this)
