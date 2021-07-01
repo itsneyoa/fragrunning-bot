@@ -69,13 +69,13 @@ class PartyHandler {
     this.app.log.info(`Getting players from guild: ${guildname}`)
     axios.get('https://api.hypixel.net/guild', { params: { name: guildname, key: this.app.config.fragruns.apiKey } }).then(async hypixelRes => {
       if (hypixelRes.data && hypixelRes.data.guild) {
-        let members = new Map()
+        let members = []
 
         await Promise.all(
           hypixelRes.data.guild.members.map(async (member) => {
             let mojangRes = await axios.get(`https://api.mojang.com/user/profiles/${member.uuid}/names`)
 
-            members.set(mojangRes.data.pop().name, member.uuid)
+            members.push(mojangRes.data.pop().name)
           })
         )
 
@@ -93,7 +93,7 @@ class PartyHandler {
     axios.get(`https://api.mojang.com/users/profiles/minecraft/${username}`).then(uuidRes => {
       axios.get('https://api.hypixel.net/friends', { params: { uuid: uuidRes.data.id, key: this.app.config.fragruns.apiKey } }).then(async hypixelRes => {
         if (hypixelRes.data && hypixelRes.data.records) {
-          let members = new Map()
+          let members = []
 
           await Promise.all(
             hypixelRes.data.records.map(async (member) => {
@@ -104,7 +104,7 @@ class PartyHandler {
 
               let mojangRes = await axios.get(`https://api.mojang.com/user/profiles/${uuid}/names`)
 
-              members.set(mojangRes.data.pop().name, member.uuidReceiver)
+              members.push(mojangRes.data.pop().name)
             })
           )
 
