@@ -33,12 +33,12 @@ class StateHandler {
       let inviter = message.split(" ")[1]
       if (inviter === "has") inviter = message.split(" ")[0].replace("-----------------------------\n", "")
 
-      if (this.app.config.fragruns.mode.toLowerCase() == 'solo' && inviter == this.app.config.fragruns.soloUser) {
+      if (this.app.config.fragruns.mode == 'solo' && inviter == this.app.config.fragruns.input) {
         this.app.log.party(`Joining ${inviter}'s party in solo mode`)
         return this.bot.chat(`/p accept ${inviter}`)  // Solo runs: Join once, never leave. No queue needed.
       }
 
-      if (this.app.config.fragruns.blacklist.includes(inviter)) {
+      if (this.app.config.fragruns.blacklist && this.app.config.fragruns.blacklist.includes(inviter)) {
         return this.app.log.party(`Not accepting invite from ${inviter} as they're blacklisted`)
       }
 
@@ -52,10 +52,10 @@ class StateHandler {
   }
 
   fetchWhitelist() {
-    switch (this.app.config.fragruns.mode.toLowerCase()) {
+    switch (this.app.config.fragruns.mode) {
       case 'guild':
         this.app.log.info(`Getting players from guild: ${this.app.config.fragruns.input}`)
-        this.getGuildMembers(this.app.config.fragruns.guildName).then(members => {
+        this.getGuildMembers(this.app.config.fragruns.input).then(members => {
           this.app.log.info(`Fetched ${members.length} players from guild: ${this.app.config.fragruns.input}`)
           this.whitelist = members
           this.whitelistEnabled = true
@@ -68,7 +68,7 @@ class StateHandler {
       case 'friends':
         this.app.log.info(`Getting players from ${this.app.config.fragruns.input}'s friends list`)
         this.getFriendsList(this.app.config.fragruns.input).then(members => {
-          this.app.log.info(`Fetched ${members.length} players from ${username}'s friends list!`)
+          this.app.log.info(`Fetched ${members.length} players from ${this.app.config.fragruns.input}'s friends list!`)
           this.whitelist = members
           this.whitelistEnabled = true
         }).catch((e) => {
@@ -93,7 +93,7 @@ class StateHandler {
 
   getGuildMembers(guildname) {
     return new Promise((resolve, reject) => {
-      axios.get('https://api.hypixel.net/guild', { params: { name: guildname, key: this.app.config.fragruns.apiKey } }).then(async hypixelRes => {
+      axios.get('https://api.hypixel.net/guild', { params: { name: guildname, key: this.app.config.apiKey } }).then(async hypixelRes => {
         if (hypixelRes.data && hypixelRes.data.guild) {
           let members = []
 
@@ -116,7 +116,7 @@ class StateHandler {
   getFriendsList(username) {
     return new Promise((resolve, reject) => {
       axios.get(`https://api.mojang.com/users/profiles/minecraft/${username}`).then(uuidRes => {
-        axios.get('https://api.hypixel.net/friends', { params: { uuid: uuidRes.data.id, key: this.app.config.fragruns.apiKey } }).then(async hypixelRes => {
+        axios.get('https://api.hypixel.net/friends', { params: { uuid: uuidRes.data.id, key: this.app.config.apiKey } }).then(async hypixelRes => {
           if (hypixelRes.data && hypixelRes.data.records) {
             let members = [username]
 

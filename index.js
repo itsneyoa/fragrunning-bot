@@ -6,8 +6,12 @@ const setup = require('./src/Setup')
 const fs = require('fs')
 
 if (!fs.existsSync(`./config.json`) || process.argv.slice(2).includes('--setup') || process.argv.slice(2).includes('-s')) {
-  setup.generateConfig()
+  setup.generateConfig().then(() => run())
 } else {
+  run()
+}
+
+function run() {
   app
     .register()
     .then(() => {

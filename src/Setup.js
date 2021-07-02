@@ -6,14 +6,73 @@ const fs = require('fs')
 
 class Generator {
   generateConfig() {
-    clear()
+    return new Promise((resolve, reject) => {
+      if (fs.existsSync(`config.json`)) {
+        inquirer.prompt([
+          {
+            type: 'list',
+            name: 'regenerate',
+            message: 'Configuration already detected. How would you like to regenerate?',
+            choices: ['Everything', 'Server', 'Minecraft', 'Fragruns', 'Api Key', 'Blacklist', 'Nothing']
+          }
+        ]).then(res => {
+          let config = require(`../config.json`)
 
+          switch (res.regenerate) {
+            case 'Everything':
+              this.makeConfigObject().then(() => resolve())
+              break
+            case 'Server':
+              this.setUpServer().then(server => {
+                config.server = server
+                this.writeToFile(config).then(() => resolve())
+              })
+              break
+            case 'Minecraft':
+              this.setUpMinecraft().then(minecraft => {
+                config.minecraft = minecraft
+                this.writeToFile(config).then(() => resolve())
+              })
+              break
+            case 'Fragruns':
+              this.setUpFragruns().then(fragruns => {
+                config.fragruns = fragruns
+                this.writeToFile(config).then(() => resolve())
+              })
+              break
+            case 'Api Key':
+              this.setUpApiKey().then(apiKey => {
+                config.apiKey = apiKey
+                this.writeToFile(config).then(() => resolve())
+              })
+              break
+            case 'Blacklist':
+              this.setUpBlacklist().then(fragruns => {
+                if (fragruns) {
+                  config.fragruns.blacklist = fragruns
+                } else {
+                  config.fragruns.blacklist = null
+                }
+                this.writeToFile(config).then(() => resolve())
+              })
+              break
+            case 'Nothing':
+              break
+          }
+        })
+      } else {
+        this.makeConfigObject().then(resolve())
+      }
+    })
+  }
+
+  makeConfigObject() {
+    clear()
     console.log(
       chalk.yellow(
         figlet.textSync('Fragruns', { horizontalLayout: 'full' })
       )
     )
-
     console.log()
 
     let config = {}
@@ -24,17 +83,16 @@ class Generator {
           config.minecraft = minecraft
           this.setUpFragruns().then(fragruns => {
             config.fragruns = fragruns
-            this.setUpBlacklist().then(blacklist => {
-              config.fragruns.blacklist = blacklist
-              fs.writeFile(`config.json`, JSON.stringify(config), error => {
-                if (error) {
-                  console.log(error)
-                } else {
-                  console.log(chalk.green(`Created configuration file!`))
-                  console.log(chalk.cyan(`Now run 'node .' to start!`))
-                }
-              })
-              resolve()
+            this.setUpApiKey().then(apiKey => {
+              config.apiKey = apiKey
+              if (['guild', 'friends', 'everyone'].includes(config.fragruns.mode)) {
+                this.setUpBlacklist().then(blacklist => {
+                  config.fragruns.blacklist = blacklist
+                  this.writeToFile(config).then(() => resolve())
+                })
+              } else {
+                this.writeToFile(config).then(() => resolve())
+              }
             })
           })
         })
@@ -153,6 +211,7 @@ class Generator {
               message: `Which user's friends is the bot for?`
             }]).then(res => {
               fragruns.input = res.input
+              fragruns.apiKey = res.apiKey
               resolve(fragruns)
             })
             break
@@ -180,6 +239,31 @@ class Generator {
             resolve(res.blacklist.split(',').map(name => name.trim()))
           })
         }
+      })
+    })
+  }
+
+  setUpApiKey() {
+    return new Promise((resolve, reject) => {
+      inquirer.prompt([{
+        type: 'input',
+        name: 'apiKey',
+        message: 'What is your Hypixel Api Key?'
+      }]).then(res => {
+        resolve(res.apiKey)
+      })
+    })
+  }
+
+  writeToFile(config) {
+    return new Promise((resolve, reject) => {
+      fs.promises.writeFile(`config.json`, JSON.stringify(config), error => {
+        if (error) {
+          reject(error)
+        }
+      }).then(() => {
+        console.log(chalk.green(`Created configuration file!`))
+        resolve()
       })
     })
   }
