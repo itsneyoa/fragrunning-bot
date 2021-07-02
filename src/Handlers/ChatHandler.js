@@ -54,9 +54,9 @@ class StateHandler {
   fetchWhitelist() {
     switch (this.app.config.fragruns.mode.toLowerCase()) {
       case 'guild':
-        this.app.log.info(`Getting players from guild: ${this.app.config.fragruns.guildName}`)
+        this.app.log.info(`Getting players from guild: ${this.app.config.fragruns.input}`)
         this.getGuildMembers(this.app.config.fragruns.guildName).then(members => {
-          this.app.log.info(`Fetched ${members.length} players from guild: ${this.app.config.fragruns.guildName}`)
+          this.app.log.info(`Fetched ${members.length} players from guild: ${this.app.config.fragruns.input}`)
           this.whitelist = members
           this.whitelistEnabled = true
         }).catch((e) => {
@@ -66,8 +66,8 @@ class StateHandler {
         break
       case 'friend':
       case 'friends':
-        this.app.log.info(`Getting players from ${this.app.config.fragruns.friendsName}'s friends list`)
-        this.getFriendsList(this.app.config.fragruns.friendsName).then(members => {
+        this.app.log.info(`Getting players from ${this.app.config.fragruns.input}'s friends list`)
+        this.getFriendsList(this.app.config.fragruns.input).then(members => {
           this.app.log.info(`Fetched ${members.length} players from ${username}'s friends list!`)
           this.whitelist = members
           this.whitelistEnabled = true
@@ -76,15 +76,15 @@ class StateHandler {
           this.whitelistEnabled = false
         })
         break
-      case 'user':
-      case 'username':
-        this.app.log.info(`Accepting party invites from: ${this.app.config.fragruns.whitelistUsers.join(', ')}`)
+      case 'users':
+      case 'whitelist':
+        this.app.log.info(`Accepting party invites from: ${this.app.config.fragruns.input.join(', ')}`)
         this.whitelistEnabled = true
-        return this.config.fragruns.whitelistUsers
+        return this.config.fragruns.input
       case 'solo':
-        this.app.log.info(`Only accepting party invites from ${this.app.config.fragruns.soloUser} and never leaving`)
+        this.app.log.info(`Only accepting party invites from ${this.app.config.fragruns.input} and never leaving`)
         this.whitelistEnabled = true
-        return [this.app.config.fragruns.soloUser]
+        return [this.app.config.fragruns.input]
       default:
         this.app.log.info(`Accepting party invites from everyone`)
         this.whitelistEnabled = false
