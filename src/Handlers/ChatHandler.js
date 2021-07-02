@@ -31,7 +31,7 @@ class StateHandler {
 
     if (this.isInvite(message)) {
       let inviter = message.split(" ")[1]
-      if (inviter === "has") inviter = message.split(' ')[0].replace("-----------------------------\n", "")
+      if (inviter === "has") inviter = message.split(" ")[0].replace(/-*\n/g, '')
 
       if (this.app.config.fragruns.blacklist && this.app.config.fragruns.blacklist.includes(inviter)) {
         return this.app.log.party(`Not adding ${inviter} to the queue as they're blacklisted`)
@@ -188,7 +188,7 @@ class StateHandler {
   }
 
   isInvite(message) {
-    return message.endsWith(" here to join!") && message.includes("has invited you to join") && !message.includes(':')
+    return message.includes("has invited you to join their party!") && message.includes("You have 60 seconds to accept. Click here to join!") && !message.includes(':')
   }
 
   isPartyJoinMessage(message) {
