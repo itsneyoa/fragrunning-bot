@@ -200,7 +200,7 @@ class StateHandler {
   }
 
   isPartyFailMessage(message) {
-    return (message.includes('That party has been disbanded.') || message.includes(`You don't have an invite to that player's party.`)) && !message.includes(':')
+    return (message.includes('That party has been disbanded.') || message.includes(`You don't have an invite to that player's party.`) || message.includes(`The party was disbanded`)) && !message.includes(':')
   }
 }
 
