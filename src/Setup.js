@@ -62,7 +62,7 @@ class Generator {
           }
         })
       } else {
-        this.makeConfigObject().then(resolve())
+        this.makeConfigObject().then(() => resolve())
       }
     })
   }
