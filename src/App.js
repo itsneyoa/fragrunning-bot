@@ -13,7 +13,7 @@ class App {
     this.chatHandler = new ChatHandler(this)
   }
 
-  async start() {
+  start() {
     this.bot = this.createBotConnection()
 
     this.stateHandler.registerEvents(this.bot)
@@ -27,6 +27,7 @@ class App {
       username: this.config.minecraft.username,
       password: this.config.minecraft.password,
       auth: this.config.minecraft.accountType,
+      version: false
     })
   }
 }

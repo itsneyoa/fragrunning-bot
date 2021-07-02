@@ -45,7 +45,7 @@ class StateHandler {
 
   onSpawn() {
     this.app.log.client('Sending Minecraft client to limbo')
-    //this.bot.chat('/ac §')
+    this.bot.chat('/ac §')
   }
 
   onError(error) {

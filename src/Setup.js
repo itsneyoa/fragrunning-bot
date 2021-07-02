@@ -129,7 +129,7 @@ class Generator {
           choices: ['Microsoft', 'Mojang']
         }
       ]).then(res => {
-        minecraft.accountType = res.accountType
+        minecraft.accountType = res.accountType.toLowerCase()
         if (res.accountType == 'Mojang') {
           inquirer.prompt([
             {
