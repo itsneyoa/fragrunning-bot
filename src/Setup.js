@@ -26,7 +26,14 @@ class Generator {
             config.fragruns = fragruns
             this.setUpBlacklist().then(blacklist => {
               config.fragruns.blacklist = blacklist
-              fs.writeFile(`config.json`, JSON.stringify(config), e => { if (e) console.log(e) })
+              fs.writeFile(`config.json`, JSON.stringify(config), error => {
+                if (error) {
+                  console.log(error)
+                } else {
+                  console.log(chalk.green(`Created configuration file!`))
+                  console.log(chalk.cyan(`Now run 'node .' to start!`))
+                }
+              })
               resolve()
             })
           })
