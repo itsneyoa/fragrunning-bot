@@ -23,6 +23,7 @@ class StateHandler {
 
   onMessage(event) {
     const message = event.toString().trim()
+    console.log(message)
 
     if (this.isLobbyJoinMessage(message)) {
       this.app.log.client('Sending Minecraft client to limbo')
@@ -72,7 +73,13 @@ class StateHandler {
     }
 
     if (this.isPartyLeaveMessage(message) || this.isPartyFailMessage(message)) {
-      this.dequeue()
+      return this.dequeue()
+    }
+
+    if (this.isAlreadyInPartyMessage(message)) {
+      setTimeout(() => {
+        return this.bot.chat('/p leave')
+      }, 100)
     }
   }
 
@@ -201,6 +208,10 @@ class StateHandler {
 
   isPartyFailMessage(message) {
     return (message.includes('That party has been disbanded.') || message.includes(`You don't have an invite to that player's party.`) || message.includes(`The party was disbanded`)) && !message.includes(':')
+  }
+
+  isAlreadyInPartyMessage(message) {
+    return message.includes('You are already in a party! Leave it to join another one') && !message.includes(':')
   }
 }
 
