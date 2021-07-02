@@ -1,6 +1,8 @@
 # Fragruns bot
+
 A bot written by [SergeantSar](https://github.com/SergeantSar) and [neyoa](https://github.com/itsneyoa) because we couldn't find any open source ones and the public ones keep getting banned
-> Warning -  Hypixel has a history of banning these bots without a reason. As there is no official statement yet this is entirely use at your own risk!
+
+> Warning - Hypixel has a history of banning these bots without a reason. As there is no official statement yet this is entirely use at your own risk!
 
 <hr>
 
@@ -26,12 +28,12 @@ You can find an [installation guide](https://github.com/itsneyoa/fragrunning-bot
 ### Roadmap
 
 - [ ] Add more whitelist options
-    - Anyone (none)
-    - Guild members of given guild(s) (guild)
-    - People on friends list of a given player (friend)
-    - Only people listed in config (strict)
+  - Anyone (none)
+  - Guild members of given guild(s) (guild)
+  - People on friends list of a given player (friend)
+  - Only people listed in config (strict)
 - [ ] Make bot autoreconnect on kick
-    - Currently it crashes
-    - This would take like 2 minutes to fix
-    - I'm lazy
-    - Bottom text
+  - Currently it crashes
+  - This would take like 2 minutes to fix
+  - I'm lazy
+  - Bottom text
