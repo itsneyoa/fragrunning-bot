@@ -57,6 +57,7 @@ class Generator {
               })
               break
             case 'Nothing':
+              resolve()
               break
           }
         })

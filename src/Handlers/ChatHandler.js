@@ -31,24 +31,62 @@ class StateHandler {
 
     if (this.isInvite(message)) {
       let inviter = message.split(" ")[1]
-      if (inviter === "has") inviter = message.split(" ")[0].replace("-----------------------------\n", "")
-
-      if (this.app.config.fragruns.mode == 'solo' && inviter == this.app.config.fragruns.input) {
-        this.app.log.party(`Joining ${inviter}'s party in solo mode`)
-        return this.bot.chat(`/p accept ${inviter}`)  // Solo runs: Join once, never leave. No queue needed.
-      }
+      if (inviter === "has") inviter = message.split(' ')[0].replace("-----------------------------\n", "")
 
       if (this.app.config.fragruns.blacklist && this.app.config.fragruns.blacklist.includes(inviter)) {
-        return this.app.log.party(`Not accepting invite from ${inviter} as they're blacklisted`)
+        return this.app.log.party(`Not adding ${inviter} to the queue as they're blacklisted`)
+      }
+
+      if (this.queue.includes(inviter)) {
+        return this.app.log.party(`Ignoring ${inviter} as they are already in the queue.`)
+      }
+
+      if (this.app.config.fragruns.mode == 'solo' && this.app.config.fragruns.input == inviter) {
+        return this.bot.chat(`/p accept ${inviter}`)
       }
 
       if (this.whitelist.includes(inviter) || !this.whitelistEnabled) {
-        this.app.log.party(`Accepting party invite from ${inviter}`)
+        this.app.log.party(`Adding ${inviter} to the queue`)
         this.queue.push(inviter) // Add user to queue
+        if (!this.active) { this.dequeue() }
+        return
       } else {
-        this.app.log.party(`Not accepting party invite from ${inviter} as they aren't on the whitelist`)
+        return this.app.log.party(`Not adding ${inviter} to the queue as they aren't on the whitelist`)
       }
     }
+
+    if (this.isPartyJoinMessage(message) && this.app.config.fragruns.mode != 'solo') {
+      let parts = message.split(' ')
+      if (parts[4] == 'party!') {
+        this.leader = parts[3].slice(0, -2)
+      } else {
+        this.leader = parts[4].slice(0, -2)
+      }
+      this.app.log.party(`Joined ${this.leader}'s party`)
+
+      setTimeout(() => {
+        this.app.log.party(`Leaving ${this.leader}'s party`)
+        this.leader = null
+        return this.bot.chat('/p leave')
+      }, 5000)
+    }
+
+    if (this.isPartyLeaveMessage(message) || this.isPartyFailMessage(message)) {
+      this.dequeue()
+    }
+  }
+
+  dequeue() {
+    if (!this.queue.length) {
+      return this.active = false
+    }
+
+    this.active = true
+    let activeUser = this.queue.shift()
+    setTimeout(() => {
+      this.app.log.party(`Accepting invite from ${activeUser}`)
+      return this.bot.chat(`/p accept ${activeUser}`)
+    }, 100)
   }
 
   fetchWhitelist() {
@@ -79,15 +117,18 @@ class StateHandler {
       case 'users':
       case 'whitelist':
         this.app.log.info(`Accepting party invites from: ${this.app.config.fragruns.input.join(', ')}`)
+        this.whitelist = this.app.config.fragruns.input
         this.whitelistEnabled = true
-        return this.config.fragruns.input
+        break
       case 'solo':
         this.app.log.info(`Only accepting party invites from ${this.app.config.fragruns.input} and never leaving`)
+        this.whitelist = [this.app.config.fragruns.input]
         this.whitelistEnabled = true
-        return [this.app.config.fragruns.input]
+        break
       default:
         this.app.log.info(`Accepting party invites from everyone`)
         this.whitelistEnabled = false
+        break
     }
   }
 
@@ -148,6 +189,18 @@ class StateHandler {
 
   isInvite(message) {
     return message.endsWith(" here to join!") && message.includes("has invited you to join") && !message.includes(':')
+  }
+
+  isPartyJoinMessage(message) {
+    return message.includes("You have joined ") && message.includes("'s party!") && !message.includes(':')
+  }
+
+  isPartyLeaveMessage(message) {
+    return message.includes('You left the party.') && !message.includes(':')
+  }
+
+  isPartyFailMessage(message) {
+    return (message.includes('That party has been disbanded.') || message.includes(`You don't have an invite to that player's party.`)) && !message.includes(':')
   }
 }
 
