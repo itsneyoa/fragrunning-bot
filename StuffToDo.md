@@ -3,3 +3,4 @@ make sure there's enough memory
 do a lot of testing lmao
 add queue support
 write github pages
+only show blacklist option on everyone, guild and friends modes
