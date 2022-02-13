@@ -16,7 +16,8 @@ class Configuration {
       friendsName: null,
       whitelistUsers: null,
       soloUser: null,
-      blacklist: null
+      blacklist: null,
+      apiKey: null
     }
   }
 
@@ -32,7 +33,7 @@ class Configuration {
     FRAGRUNS_USERS: val => (this.properties.fragruns.whitelistUsers = val),
     FRAGRUNS_SOLO: val => (this.properties.fragruns.soloUser = val),
     FRAGRUNS_BLACKLIST: val => (this.properties.fragruns.blacklist = val),
-
+    API_KEY: val => (this.properties.fragruns.apiKey = val)
   }
 
   constructor() {

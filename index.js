@@ -17,7 +17,7 @@ function run() {
     .then(() => {
       app.start()
     })
-    .catch((e) => {
+    .catch(e => {
       console.error(e)
     })
 }

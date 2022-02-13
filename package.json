@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node .",
     "start": "node index.js",
-    "setup": "node index.js --setup"
+    "setup": "node index.js --setup",
+    "format": "prettier . --write"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,17 @@
     "inquirer": "^8.1.1",
     "mineflayer": "^3.3.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true,
+    "bracketSpacing": true,
+    "arrowParens": "avoid",
+    "printWidth": 180,
+    "endOfLine": "lf"
+  }
 }
