@@ -3,12 +3,12 @@ const fs = require('fs')
 class Configuration {
   properties = {
     server: {
-      host: 'mc.hypixel.net'
+      host: 'mc.hypixel.net',
     },
     minecraft: {
       accountType: null,
       username: null,
-      password: null
+      password: null,
     },
     fragruns: {
       mode: null,
@@ -17,23 +17,25 @@ class Configuration {
       whitelistUsers: null,
       soloUser: null,
       blacklist: null,
-      apiKey: null
-    }
+      apiKey: null,
+      message: null,
+    },
   }
 
   environmentOverrides = {
-    SERVER_HOST: val => (this.properties.server.host = val),
-    MINECRAFT_USERNAME: val => (this.properties.minecraft.username = val),
-    MINECRAFT_PASSWORD: val => (this.properties.minecraft.password = val),
-    MINECRAFT_LOBBY_HOLDER: val => (this.properties.minecraft.lobbyHolder = val),
-    MINECRAFT_ACCOUNT_TYPE: val => (this.properties.minecraft.accountType = val),
-    FRAGRUNS_MODE: val => (this.properties.fragruns.mode = val),
-    FRAGRUNS_GUILD: val => (this.properties.fragruns.guildName = val),
-    FRAGRUNS_FRIENDS: val => (this.properties.fragruns.friendsName = val),
-    FRAGRUNS_USERS: val => (this.properties.fragruns.whitelistUsers = val),
-    FRAGRUNS_SOLO: val => (this.properties.fragruns.soloUser = val),
-    FRAGRUNS_BLACKLIST: val => (this.properties.fragruns.blacklist = val),
-    API_KEY: val => (this.properties.fragruns.apiKey = val)
+    SERVER_HOST: (val) => (this.properties.server.host = val),
+    MINECRAFT_USERNAME: (val) => (this.properties.minecraft.username = val),
+    MINECRAFT_PASSWORD: (val) => (this.properties.minecraft.password = val),
+    MINECRAFT_LOBBY_HOLDER: (val) => (this.properties.minecraft.lobbyHolder = val),
+    MINECRAFT_ACCOUNT_TYPE: (val) => (this.properties.minecraft.accountType = val),
+    FRAGRUNS_MODE: (val) => (this.properties.fragruns.mode = val),
+    FRAGRUNS_GUILD: (val) => (this.properties.fragruns.guildName = val),
+    FRAGRUNS_FRIENDS: (val) => (this.properties.fragruns.friendsName = val),
+    FRAGRUNS_USERS: (val) => (this.properties.fragruns.whitelistUsers = val),
+    FRAGRUNS_SOLO: (val) => (this.properties.fragruns.soloUser = val),
+    FRAGRUNS_BLACKLIST: (val) => (this.properties.fragruns.blacklist = val),
+    API_KEY: (val) => (this.properties.fragruns.apiKey = val),
+    MESSAGE: (val) => (this.properties.fragruns.message = val),
   }
 
   constructor() {

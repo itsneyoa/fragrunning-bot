@@ -93,6 +93,11 @@ class ChatHandler {
     let activeUser = this.queue.shift()
     setTimeout(() => {
       this.app.log.party(`Accepting invite from ${activeUser}`)
+      if (this.app.config.fragruns.message.length) {
+        setTimeout(() => {
+          this.bot.chat(`/pc ${this.app.config.fragruns.message}`)
+        }, 100)
+      }
       return this.bot.chat(`/p accept ${activeUser}`)
     }, 100)
   }
@@ -119,7 +124,7 @@ class ChatHandler {
 
   async getGuildMembers(guildname) {
     const hypixel = await axios.get('https://api.hypixel.net/guild', {
-      params: { name: guildname, key: this.app.config.fragruns.apiKey }
+      params: { name: guildname, key: this.app.config.fragruns.apiKey },
     })
 
     if (hypixel.status != 200) throw hypixel.statusText
@@ -127,7 +132,7 @@ class ChatHandler {
     let members = []
 
     await Promise.all(
-      hypixel.data.guild.members.map(async member => {
+      hypixel.data.guild.members.map(async (member) => {
         const mojang = await axios.get(`https://api.mojang.com/user/profiles/${member.uuid}/names`)
 
         if (mojang.status == 200) members.push(mojang.data.pop().name)
@@ -142,17 +147,17 @@ class ChatHandler {
     return new Promise((resolve, reject) => {
       axios
         .get(`https://api.mojang.com/users/profiles/minecraft/${username}`)
-        .then(uuidRes => {
+        .then((uuidRes) => {
           axios
             .get('https://api.hypixel.net/friends', {
-              params: { uuid: uuidRes.data.id, key: this.app.config.fragruns.apiKey }
+              params: { uuid: uuidRes.data.id, key: this.app.config.fragruns.apiKey },
             })
-            .then(async hypixelRes => {
+            .then(async (hypixelRes) => {
               if (hypixelRes.data && hypixelRes.data.records) {
                 let members = [username]
 
                 await Promise.all(
-                  hypixelRes.data.records.map(async member => {
+                  hypixelRes.data.records.map(async (member) => {
                     var uuid = member.uuidReceiver
                     if (uuidRes.data.id == member.uuidReceiver) {
                       uuid = member.uuidSender
@@ -169,9 +174,9 @@ class ChatHandler {
                 reject(`Invalid API Key or Player ${username} not found`)
               }
             })
-            .catch(e => reject(e))
+            .catch((e) => reject(e))
         })
-        .catch(e => reject(e))
+        .catch((e) => reject(e))
     })
   }
 
@@ -180,7 +185,11 @@ class ChatHandler {
   }
 
   isInvite(message) {
-    return message.includes('has invited you to join their party!') && message.includes('You have 60 seconds to accept. Click here to join!') && !message.includes(':')
+    return (
+      message.includes('has invited you to join their party!') &&
+      message.includes('You have 60 seconds to accept. Click here to join!') &&
+      !message.includes(':')
+    )
   }
 
   isPartyJoinMessage(message) {
@@ -193,7 +202,9 @@ class ChatHandler {
 
   isPartyFailMessage(message) {
     return (
-      (message.includes('That party has been disbanded.') || message.includes(`You don't have an invite to that player's party.`) || message.includes(`The party was disbanded`)) &&
+      (message.includes('That party has been disbanded.') ||
+        message.includes(`You don't have an invite to that player's party.`) ||
+        message.includes(`The party was disbanded`)) &&
       !message.includes(':')
     )
   }

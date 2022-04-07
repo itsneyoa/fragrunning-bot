@@ -14,10 +14,10 @@ class Generator {
               type: 'list',
               name: 'regenerate',
               message: 'Configuration already detected. How would you like to regenerate?',
-              choices: ['Everything', 'Server', 'Minecraft', 'Fragruns', 'Api Key', 'Blacklist', 'Nothing']
-            }
+              choices: ['Everything', 'Server', 'Minecraft', 'Fragruns', 'Api Key', 'Blacklist', 'Message', 'Nothing'],
+            },
           ])
-          .then(res => {
+          .then((res) => {
             let config = require(`../config.json`)
 
             switch (res.regenerate) {
@@ -25,31 +25,31 @@ class Generator {
                 this.makeConfigObject().then(() => resolve())
                 break
               case 'Server':
-                this.setUpServer().then(server => {
+                this.setUpServer().then((server) => {
                   config.server = server
                   this.writeToFile(config).then(() => resolve())
                 })
                 break
               case 'Minecraft':
-                this.setUpMinecraft().then(minecraft => {
+                this.setUpMinecraft().then((minecraft) => {
                   config.minecraft = minecraft
                   this.writeToFile(config).then(() => resolve())
                 })
                 break
               case 'Fragruns':
-                this.setUpFragruns().then(fragruns => {
+                this.setUpFragruns().then((fragruns) => {
                   config.fragruns = fragruns
                   this.writeToFile(config).then(() => resolve())
                 })
                 break
               case 'Api Key':
-                this.setUpApiKey().then(apiKey => {
+                this.setUpApiKey().then((apiKey) => {
                   config.fragruns.apiKey = apiKey
                   this.writeToFile(config).then(() => resolve())
                 })
                 break
               case 'Blacklist':
-                this.setUpBlacklist().then(fragruns => {
+                this.setUpBlacklist().then((fragruns) => {
                   if (fragruns) {
                     config.fragruns.blacklist = fragruns
                   } else {
@@ -58,6 +58,11 @@ class Generator {
                   this.writeToFile(config).then(() => resolve())
                 })
                 break
+              case 'Message':
+                this.setUpMessage().then((message) => {
+                  config.fragruns.message = message
+                  this.writeToFile(config).then(() => resolve())
+                })
               case 'Nothing':
                 resolve()
                 break
@@ -76,22 +81,25 @@ class Generator {
 
     let config = {}
     return new Promise((resolve, reject) => {
-      this.setUpServer().then(server => {
+      this.setUpServer().then((server) => {
         config.server = server
-        this.setUpMinecraft().then(minecraft => {
+        this.setUpMinecraft().then((minecraft) => {
           config.minecraft = minecraft
-          this.setUpFragruns().then(fragruns => {
+          this.setUpFragruns().then((fragruns) => {
             config.fragruns = fragruns
-            this.setUpApiKey().then(apiKey => {
+            this.setUpApiKey().then((apiKey) => {
               config.fragruns.apiKey = apiKey
-              if (['guild', 'friends', 'everyone'].includes(config.fragruns.mode)) {
-                this.setUpBlacklist().then(blacklist => {
-                  config.fragruns.blacklist = blacklist
+              this.setUpMessage().then((message) => {
+                config.fragruns.message = message
+                if (['guild', 'friends', 'everyone'].includes(config.fragruns.mode)) {
+                  this.setUpBlacklist().then((blacklist) => {
+                    config.fragruns.blacklist = blacklist
+                    this.writeToFile(config).then(() => resolve())
+                  })
+                } else {
                   this.writeToFile(config).then(() => resolve())
-                })
-              } else {
-                this.writeToFile(config).then(() => resolve())
-              }
+                }
+              })
             })
           })
         })
@@ -108,10 +116,10 @@ class Generator {
             type: 'input',
             name: 'host',
             message: 'What server would you like to connect to?',
-            default: 'mc.hypixel.net'
-          }
+            default: 'mc.hypixel.net',
+          },
         ])
-        .then(res => {
+        .then((res) => {
           server.host = res.host
           resolve(server)
         })
@@ -127,10 +135,10 @@ class Generator {
             type: 'list',
             name: 'accountType',
             message: 'Are you using a Microsoft or Mojang account?',
-            choices: ['Microsoft', 'Mojang']
-          }
+            choices: ['Microsoft', 'Mojang'],
+          },
         ])
-        .then(res => {
+        .then((res) => {
           minecraft.accountType = res.accountType.toLowerCase()
           if (res.accountType == 'Mojang') {
             inquirer
@@ -138,16 +146,16 @@ class Generator {
                 {
                   type: 'input',
                   name: 'username',
-                  message: 'Enter the username or email linked to the Mojang account.'
+                  message: 'Enter the username or email linked to the Mojang account.',
                 },
                 {
                   type: 'password',
                   name: 'password',
                   message: 'Enter the password.',
-                  mask: true
-                }
+                  mask: true,
+                },
               ])
-              .then(res => {
+              .then((res) => {
                 minecraft.username = res.username
                 minecraft.password = res.password
                 resolve(minecraft)
@@ -168,10 +176,10 @@ class Generator {
             type: 'list',
             name: 'mode',
             message: 'Which whitelist mode would you like to use?',
-            choices: ['Everyone', 'Solo', 'Users', 'Guild', 'Friends']
-          }
+            choices: ['Everyone', 'Solo', 'Users', 'Guild', 'Friends'],
+          },
         ])
-        .then(res => {
+        .then((res) => {
           switch (res.mode) {
             case 'Everyone':
               fragruns.mode = 'everyone'
@@ -184,10 +192,10 @@ class Generator {
                   {
                     type: 'input',
                     name: 'input',
-                    message: 'Which user is the bot for?'
-                  }
+                    message: 'Which user is the bot for?',
+                  },
                 ])
-                .then(res => {
+                .then((res) => {
                   fragruns.input = res.input
                   resolve(fragruns)
                 })
@@ -199,11 +207,11 @@ class Generator {
                   {
                     type: 'input',
                     name: 'input',
-                    message: 'Which users are the bot for? (Separate with a comma)'
-                  }
+                    message: 'Which users are the bot for? (Separate with a comma)',
+                  },
                 ])
-                .then(res => {
-                  fragruns.input = res.input.split(',').map(name => name.trim())
+                .then((res) => {
+                  fragruns.input = res.input.split(',').map((name) => name.trim())
                   resolve(fragruns)
                 })
               break
@@ -214,10 +222,10 @@ class Generator {
                   {
                     type: 'input',
                     name: 'input',
-                    message: 'Which guild is the bot for?'
-                  }
+                    message: 'Which guild is the bot for?',
+                  },
                 ])
-                .then(res => {
+                .then((res) => {
                   fragruns.input = res.input
                   resolve(fragruns)
                 })
@@ -229,10 +237,10 @@ class Generator {
                   {
                     type: 'input',
                     name: 'input',
-                    message: `Which user's friends is the bot for?`
-                  }
+                    message: `Which user's friends is the bot for?`,
+                  },
                 ])
-                .then(res => {
+                .then((res) => {
                   fragruns.input = res.input
                   fragruns.apiKey = res.apiKey
                   resolve(fragruns)
@@ -251,10 +259,10 @@ class Generator {
             type: 'confirm',
             name: 'blacklistEnabled',
             message: 'Would you like to use a blacklist?',
-            default: false
-          }
+            default: false,
+          },
         ])
-        .then(res => {
+        .then((res) => {
           if (!res.blacklistEnabled) {
             resolve([])
           } else {
@@ -263,11 +271,11 @@ class Generator {
                 {
                   type: 'input',
                   name: 'blacklist',
-                  message: 'Which users would you like the blacklist from the bot? (Separate with a comma)'
-                }
+                  message: 'Which users would you like the blacklist from the bot? (Separate with a comma)',
+                },
               ])
-              .then(res => {
-                resolve(res.blacklist.split(',').map(name => name.trim()))
+              .then((res) => {
+                resolve(res.blacklist.split(',').map((name) => name.trim()))
               })
           }
         })
@@ -281,11 +289,27 @@ class Generator {
           {
             type: 'input',
             name: 'apiKey',
-            message: 'What is your Hypixel Api Key?'
-          }
+            message: 'What is your Hypixel Api Key?',
+          },
         ])
-        .then(res => {
+        .then((res) => {
           resolve(res.apiKey)
+        })
+    })
+  }
+
+  setUpMessage() {
+    return new Promise((resolve, reject) => {
+      inquirer
+        .prompt([
+          {
+            type: 'input',
+            name: 'message',
+            message: `If you'd like to send all users a message on party join, enter it here.`,
+          },
+        ])
+        .then((res) => {
+          resolve(res.message)
         })
     })
   }
@@ -293,7 +317,7 @@ class Generator {
   writeToFile(config) {
     return new Promise((resolve, reject) => {
       fs.promises
-        .writeFile(`config.json`, JSON.stringify(config, null, 2), error => {
+        .writeFile(`config.json`, JSON.stringify(config, null, 2), (error) => {
           if (error) {
             reject(error)
           }
