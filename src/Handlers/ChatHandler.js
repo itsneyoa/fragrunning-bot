@@ -26,7 +26,7 @@ class ChatHandler {
 
     if (this.isLobbyJoinMessage(message)) {
       this.app.log.client('Sending Minecraft client to limbo')
-      return this.bot.chat('/ac §')
+      return this.bot.chat('§')
     }
 
     if (this.isInvite(message)) {
